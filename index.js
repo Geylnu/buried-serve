@@ -16,6 +16,8 @@ app.post('/pageview', (req, res) => {
         console.log('url: '+ data.url);
         console.log('th_app_id: '+ data.th_app_id);
     });
+    res.statusCode = 200;
+    res.send({code: 0});
 });
 
 app.post('/pageloadDuration', (req, res) => {
@@ -25,6 +27,8 @@ app.post('/pageloadDuration', (req, res) => {
         console.log('th_app_id: '+ data.th_app_id);
         console.log('duration: '+ data.duration);
     });
+    res.statusCode = 200;
+    res.send({code: 0});
 });
 
 app.post('/networkRequestMonitor', (req, res) => {
@@ -35,6 +39,8 @@ app.post('/networkRequestMonitor', (req, res) => {
         console.log('duration: '+ data.duration);
         console.log('httpCode: '+ data.httpCode);
     });
+    res.statusCode = 200;
+    res.send({code: 0});
 });
 
 app.post('/clickElement', (req, res) => {
@@ -44,6 +50,8 @@ app.post('/clickElement', (req, res) => {
         console.log('th_app_id: '+ data.th_app_id);
         console.log('productId: '+ data.productId);
     });
+    res.statusCode = 200;
+    res.send({code: 0});
 });
 
 app.listen(3306, _ => {
