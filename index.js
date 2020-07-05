@@ -17,7 +17,7 @@ app.all('*', function (req, res, next) {
 
 app.post('/pageview', (req, res) => {
     const bodyData = req.body
-    const ip = req.headers["X-Real-IP"]  || res.connection.remoteAddress
+    const ip = req.headers["x-real-ip"]  || res.connection.remoteAddress
     console.log(dayjs().format("YYYY-MM-DD HH:mm:ss")+ `  ${ip}  [pageview]  th_appid:${bodyData.th_app_id} url:${bodyData.url}`, )
 
     res.statusCode = 200;
@@ -26,23 +26,23 @@ app.post('/pageview', (req, res) => {
 
 app.post('/pageloadDuration', (req, res) => {
     const bodyData = req.body
-    const ip = req.headers["X-Real-IP"]  || res.connection.remoteAddress
-    console.log(dayjs().format("YYYY-MM-DD HH:mm:ss")+ `   ${ip} [pageloadDuration] th_appid:${bodyData.th_app_id} duration:${bodyData.duration} url:${bodyData.url}`, )
+    const ip = req.headers["x-real-ip"]  || res.connection.remoteAddress
+    console.log(dayjs().format("YYYY-MM-DD HH:mm:ss")+ `   ${ip} [pageloadDuration] th_appid:${bodyData.th_app_id} duration:${bodyData.duration}ms url:${bodyData.url}`, )
     res.statusCode = 200;
     res.send({code: 0});
 });
 
 app.post('/networkRequestMonitor', (req, res) => {
     const bodyData = req.body
-    const ip = req.headers["X-Real-IP"]  || res.connection.remoteAddress
-    console.log(dayjs().format("YYYY-MM-DD HH:mm:ss")+ `   ${ip} [networkRequestMonitor] th_appid:${bodyData.th_app_id} duration:${bodyData.duration} httpCode:${bodyData.httpCode} url:${bodyData.url}`, )
+    const ip = req.headers["x-real-ip"]  || res.connection.remoteAddress
+    console.log(dayjs().format("YYYY-MM-DD HH:mm:ss")+ `   ${ip} [networkRequestMonitor] th_appid:${bodyData.th_app_id} duration:${bodyData.duration}ms httpCode:${bodyData.httpCode} url:${bodyData.url}`, )
     res.statusCode = 200;
     res.send({code: 0});
 });
 
 app.post('/clickElement', (req, res) => {
     const bodyData = req.body
-    const ip = req.headers["X-Real-IP"]  || res.connection.remoteAddress
+    const ip = req.headers["x-real-ip"]  || res.connection.remoteAddress
     console.log(dayjs().format("YYYY-MM-DD HH:mm:ss")+ `   ${ip} [clickElement] th_appid:${bodyData.th_app_id} productId:${bodyData.productId} elementId:${bodyData.elementId}`, )
     res.statusCode = 200;
     res.send({code: 0});
