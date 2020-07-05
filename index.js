@@ -1,6 +1,11 @@
 const express = require("express");
+const bodyParser = require('body-parser')
+const dayjs = require("dayjs")
+
+
 const app = express();
-const { json } = require("express");
+
+app.use(bodyParser.json())
 
 app.all('*', function (req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -11,45 +16,34 @@ app.all('*', function (req, res, next) {
 });
 
 app.post('/pageview', (req, res) => {
-    req.on('data', data => {
-        data = JSON.parse(data.toString());
-        console.log('url: '+ data.url);
-        console.log('th_app_id: '+ data.th_app_id);
-    });
+    const bodyData = req.body
+    const ip = req.headers["X-Real-IP"]  || res.connection.remoteAddress
+    console.log(dayjs().format("YYYY-MM-DD HH:mm:ss")+ `  ${ip}  [pageview]  th_appid:${bodyData.th_app_id} url:${bodyData.url}`, )
+
     res.statusCode = 200;
     res.send({code: 0});
 });
 
 app.post('/pageloadDuration', (req, res) => {
-    req.on('data', data => {
-        data = JSON.parse(data.toString());
-        console.log('url: '+ data.url);
-        console.log('th_app_id: '+ data.th_app_id);
-        console.log('duration: '+ data.duration);
-    });
+    const bodyData = req.body
+    const ip = req.headers["X-Real-IP"]  || res.connection.remoteAddress
+    console.log(dayjs().format("YYYY-MM-DD HH:mm:ss")+ `   ${ip} [pageloadDuration] th_appid:${bodyData.th_app_id} duration:${bodyData.duration} url:${bodyData.url}`, )
     res.statusCode = 200;
     res.send({code: 0});
 });
 
 app.post('/networkRequestMonitor', (req, res) => {
-    req.on('data', data => {
-        data = JSON.parse(data.toString());
-        console.log('url: '+ data.url);
-        console.log('th_app_id: '+ data.th_app_id);
-        console.log('duration: '+ data.duration);
-        console.log('httpCode: '+ data.httpCode);
-    });
+    const bodyData = req.body
+    const ip = req.headers["X-Real-IP"]  || res.connection.remoteAddress
+    console.log(dayjs().format("YYYY-MM-DD HH:mm:ss")+ `   ${ip} [networkRequestMonitor] th_appid:${bodyData.th_app_id} duration:${bodyData.duration} httpCode:${bodyData.httpCode} url:${bodyData.url}`, )
     res.statusCode = 200;
     res.send({code: 0});
 });
 
 app.post('/clickElement', (req, res) => {
-    req.on('data', data => {
-        data = JSON.parse(data.toString());
-        console.log('elementId: '+ data.elementId);
-        console.log('th_app_id: '+ data.th_app_id);
-        console.log('productId: '+ data.productId);
-    });
+    const bodyData = req.body
+    const ip = req.headers["X-Real-IP"]  || res.connection.remoteAddress
+    console.log(dayjs().format("YYYY-MM-DD HH:mm:ss")+ `   ${ip} [clickElement] th_appid:${bodyData.th_app_id} productId:${bodyData.productId} elementId:${bodyData.elementId}`, )
     res.statusCode = 200;
     res.send({code: 0});
 });
